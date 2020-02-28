@@ -1,0 +1,15 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: kafkarator
+  namespace: dataplattform
+  labels:
+    team: dataplattform
+spec:
+  image: {{ image }}
+  liveness:
+    path: /isHealthy
+  readiness:
+    path: /isReady
+  prometheus:
+    enabled: false
