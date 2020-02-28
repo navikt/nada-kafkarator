@@ -19,13 +19,13 @@ jobs:
         uses: abatilo/actions-poetry@v1.5.0
         with:
           python_version: 3.7
-          poetry_version: 0.12.17
+          poetry_version: 1.0.2
           args: install
       - name: Run pytest
         uses: abatilo/actions-poetry@v1.5.0
         with:
           python_version: 3.7
-          poetry_version: 0.12.17
+          poetry_version: 1.0.2
           args: run pytest --cov-fail-under=10 tests/
       - name: Lag tag for image
         run: echo "::set-env name=TAG::$(git log -1 --pretty='%ad_%h' --date=format:'%Y%m%d%H%M%S')"
