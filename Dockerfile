@@ -13,4 +13,4 @@ FROM python:3.7-slim
 COPY --from=build /app/.venv /app/.venv/
 COPY --from=build /app/kafkarator /app/kafkarator/
 
-CMD /app/.venv/bin/hypercorn --access-logfile=- --bind 0.0.0.0 --error-logfile=- --debug --log-level debug kafkarator.main:app
+CMD /app/.venv/bin/hypercorn --access-logfile=- --bind 0.0.0.0:8080 --error-logfile=- --debug --log-level debug kafkarator.main:app
