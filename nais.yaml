@@ -12,4 +12,5 @@ spec:
   readiness:
     path: /isReady
   prometheus:
-    enabled: false
+    enabled: true
+    path: /metrics

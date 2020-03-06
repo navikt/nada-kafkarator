@@ -49,7 +49,7 @@ tests = ["coverage", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "zope.i
 [[package]]
 category = "dev"
 description = "Cross-platform colored terminal text."
-marker = "sys_platform == \"win32\" or platform_system == \"Windows\""
+marker = "platform_system == \"Windows\" or sys_platform == \"win32\""
 name = "colorama"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
@@ -263,6 +263,17 @@ name = "priority"
 optional = false
 python-versions = "*"
 version = "1.3.0"
+
+[[package]]
+category = "main"
+description = "Python client for the Prometheus monitoring system."
+name = "prometheus-client"
+optional = false
+python-versions = "*"
+version = "0.7.1"
+
+[package.extras]
+twisted = ["twisted"]
 
 [[package]]
 category = "dev"
@@ -554,6 +565,18 @@ version = "0.12.9"
 full = ["aiofiles", "graphene", "itsdangerous", "jinja2", "python-multipart", "pyyaml", "requests", "ujson"]
 
 [[package]]
+category = "main"
+description = "Prometheus metrics exporter for Starlette applications."
+name = "starlette-exporter"
+optional = false
+python-versions = "*"
+version = "0.1.0"
+
+[package.dependencies]
+prometheus-client = "*"
+starlette = "*"
+
+[[package]]
 category = "dev"
 description = "ANSII Color formatting for output in terminal."
 name = "termcolor"
@@ -675,7 +698,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "89b915159f3fdd13c67c53976f05d19cc9a9365a887c50c9b6d22248f96710eb"
+content-hash = "6eb8fea3db69b4504e354cbc46698e88bedf7c7b66f9a85c9df96145d061aba5"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -822,6 +845,9 @@ priority = [
     {file = "priority-1.3.0-py2.py3-none-any.whl", hash = "sha256:be4fcb94b5e37cdeb40af5533afe6dd603bd665fe9c8b3052610fc1001d5d1eb"},
     {file = "priority-1.3.0.tar.gz", hash = "sha256:6bc1961a6d7fcacbfc337769f1a382c8e746566aaa365e78047abe9f66b2ffbe"},
 ]
+prometheus-client = [
+    {file = "prometheus_client-0.7.1.tar.gz", hash = "sha256:71cd24a2b3eb335cb800c7159f423df1bd4dcd5171b234be15e3f31ec9f622da"},
+]
 prospector = [
     {file = "prospector-1.2.0.tar.gz", hash = "sha256:ea910794b53cfefcb5dfb6b4eb0323e42d1a88132e165b85b016cc7f0b6ae635"},
 ]
@@ -929,6 +955,10 @@ snowballstemmer = [
 ]
 starlette = [
     {file = "starlette-0.12.9.tar.gz", hash = "sha256:c2ac9a42e0e0328ad20fe444115ac5e3760c1ee2ac1ff8cdb5ec915c4a453411"},
+]
+starlette-exporter = [
+    {file = "starlette_exporter-0.1.0-py3-none-any.whl", hash = "sha256:07c1f82f68071e8cc22b0ef761efb296f6c9f61a43dd727667422a7096d9b58b"},
+    {file = "starlette_exporter-0.1.0.tar.gz", hash = "sha256:71b15b59f61249e4e8825a3427be98ba3b8525d3c7317913ff2c15d2b99bdf70"},
 ]
 termcolor = [
     {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
