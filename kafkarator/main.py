@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fiaas_logging import init_logging
 from prometheus_client import Counter
 from starlette_exporter import PrometheusMiddleware, handle_metrics
 
@@ -7,6 +8,11 @@ app.add_middleware(PrometheusMiddleware)
 app.add_route("/metrics", handle_metrics)
 
 TEST_COUNTER = Counter("test_counter", "A counter to test that the prometheus integration works")
+
+
+@app.on_event("startup")
+async def configure_logging():
+    init_logging(format="json")
 
 
 @app.get("/")
