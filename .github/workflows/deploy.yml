@@ -23,15 +23,11 @@ jobs:
     needs: setup
     env:
       IMAGE: "${{ needs.setup.outputs.image }}"
-      ENV_TEST: "> ${{ needs.setup.outputs.image }} <"
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Build docker image
-        env:
-          STEP_ENV_TEST: "= ${{ needs.setup.outputs.image }} ="
         run: |
-          echo "ENV_TEST: ${ENV_TEST}, STEP_ENV_TEST: ${STEP_ENV_TEST}"
           docker build --tag ${IMAGE} --tag ${BASEIMAGE}:latest .
       - name: Publish docker image
         env:
