@@ -29,7 +29,9 @@ jobs:
       - name: Publish docker image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STEP_ENV_TEST: "= ${{ needs.setup.outputs.image }} ="
         run: |
+          echo "ENV_TEST: ${ENV_TEST}, STEP_ENV_TEST: ${STEP_ENV_TEST}"
           echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} --password-stdin
           docker push ${BASEIMAGE}
   deploy-dev:
