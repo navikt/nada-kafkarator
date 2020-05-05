@@ -6,6 +6,8 @@ Date: 2020-02-27
 
 Accepted
 
+Followup [6. Kafkarator API is focused around dedicated CRDs](0006-kafkarator-api-is-focused-around-dedicated-crds.md)
+
 ## Context
 
 The project requires dealing with two relatively separate concerns:
