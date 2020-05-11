@@ -8,6 +8,8 @@ Accepted
 
 See also [4. Combine topic creation and credentials management in same app](0004-combine-topic-creation-and-credentials-management-in-same-app.md)
 
+Updated by [8. User experience](0008-user-experience.md)
+
 ## Context
 
 When application developers wants to interact with Kafkarator, they need an API. We have previously been vague about how that API should look, should it be one CRD, multiple CRDs, piggyback on existing NAIS CRDs etc.
