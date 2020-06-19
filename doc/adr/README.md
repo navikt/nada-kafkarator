@@ -8,3 +8,6 @@
 * [6. Kafkarator API is focused around dedicated CRDs](0006-kafkarator-api-is-focused-around-dedicated-crds.md)
 * [7. Only for Aiven](0007-only-for-aiven.md)
 * [8. User experience](0008-user-experience.md)
+
+
+> Generate this file using the command `adr generate toc -o doc/adr/.outro.md > doc/adr/README.md`

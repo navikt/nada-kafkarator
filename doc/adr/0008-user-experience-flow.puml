@@ -1,0 +1,47 @@
+@startuml
+title Kafkarator User Experience flow
+
+box Developer teams
+actor "Topic Owner"
+actor "Topic User"
+end box
+
+control Kafkarator
+
+box Cluster resources
+participant Topic
+participant AppTopic
+participant TopicAccess
+participant Secret << GCP >>
+end box
+
+participant "Secret in Vault" as VaultSecret << on-site >>
+participant Aiven
+
+== Topic creation ==
+"Topic Owner" -> Topic **: Apply config
+Topic -> Kafkarator: Watch for updates
+Kafkarator -> Aiven: Create/update topic
+group if needed
+    Kafkarator -> Aiven: Create service user for Topic Owner
+end
+Kafkarator -> TopicAccess ** : Record owner
+
+
+== Getting topic access ==
+"Topic User" -> AppTopic **: Apply
+AppTopic -> Kafkarator: Watch for updates
+group if needed
+    Kafkarator -> Aiven: Create service user for Topic User
+    Aiven -> Kafkarator: Provide credentials
+    Kafkarator -> Secret **: ""aiven-credentials""
+    Kafkarator -> VaultSecret **: ""aiven-credentials""
+end
+Kafkarator -> TopicAccess: Add access request
+
+== Managing topic access ==
+"Topic Owner" -> TopicAccess: Accept access request
+TopicAccess -> Kafkarator: Watch for updates
+Kafkarator -> Aiven: Update service user for Topic User with new ACL
+
+@enduml
