@@ -10,4 +10,4 @@
 * [8. User experience](0008-user-experience.md)
 
 
-> Generate this file using the command `adr generate toc -o doc/adr/.outro.md > doc/adr/README.md`
+> Generate this file using the command `poetry run inv update-adr`

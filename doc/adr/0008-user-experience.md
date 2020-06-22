@@ -41,25 +41,23 @@ The flow can be separated into three distinct parts:
 1. A developer creates a Topic CRD in their team namespace, detailing the topic name and configuration (1) 
 2. Kafkarator sees the Topic and
     1. Creates the topic in the Aiven cluster
-    2. If the team does not already have a service user in Aiven, it is created
-    3. Creates a TopicAccess CRD object, recording the team as owner of this Topic
+    2. Creates a TopicAccess CRD object, recording the team as owner of this Topic
 
 #### Getting topic access
 
 1. A developer creates an AppTopic CRD in their team namespace, connecting an application with topics for either 
    producing or consuming (2)
 2. Kafkarator sees the AppTopic and
-    1. If the team does not already have a service user in Aiven, it is created
+    1. If the application does not already have a service user in Aiven, it is created
     2. Downloads credentials for service user
-    3. Creates a Kubernetes secret in the team namespace if on GCP (3)
-    4. Creates a Vault secret if on-site (3)
-    5. Adds an access request to the TopicAccess associated with this Topic
+    3. Creates a Kubernetes secret in the team namespace
+    4. Adds an access request to the associated TopicAccess
 
 #### Managing topic access
 
 1. A topic owner edits the TopicAccess CRD to accept an access request (4)
 2. Kafkarator sees the TopicAccess change and
-    1. Updates ACL for the service users, granting or removing access to a Topic
+    1. Updates ACL for all relevant service users, granting or removing access to a Topic (5)
     
 #### Future work
 
@@ -76,6 +74,9 @@ if it exists.
 (4) Later iterations might want to provide a UI for teams to manage access, instead of editing CRDs directly. This would
 reduce the chance of errors, but requires proper access control in the UI which is already provided by Kubernetes.
 
+(5) Credentials for topic access is provided as service users per application, but we want access to be granted on a 
+team basis. This allows for limiting access to individual applications should the need arise at a later point.
+
 ## Decisions
 
 - We will keep the CRDs as detailed in [6. Kafkarator API is focused around dedicated CRDs](0006-kafkarator-api-is-focused-around-dedicated-crds.md)
@@ -90,3 +91,4 @@ This will be good enough for us to open up for users, so that we can gather feed
 the user experience further.
 
 Users needs to work directly with CRDs, especially topic owners. 
+
