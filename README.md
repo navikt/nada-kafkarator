@@ -1,5 +1,7 @@
 # nada-kafkarator
 
+> :warning: **This project is abandoned. Look at https://github.com/nais/kafkarator instead.** :warning:
+
 ## Overview
 
 Kafkarator has two responsibilities:
